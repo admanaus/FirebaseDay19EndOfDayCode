@@ -4,6 +4,7 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'company/all', component: CompanyListComponent },  // <-- new route
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'company/:id', component: CompanyEditComponent },
   { path: 'contact/all', component: ContactListComponent },
   { path: 'contact/:id', component: ContactEditComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'company/all' }                  // <-- redirect to the list now
 ];
 
