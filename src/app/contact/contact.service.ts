@@ -1,7 +1,7 @@
 import { Injectable, inject, EnvironmentInjector } from '@angular/core';
 import { Contact } from '../models/contact';
 import { map, merge, Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from "@angular/fire/compat/firestore";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, CollectionReference, DocumentChangeAction } from "@angular/fire/compat/firestore";
 import { runInInjectionContext } from '@angular/core';
 
 @Injectable({
@@ -15,8 +15,13 @@ export class ContactService {
     this.contactsRef = this.db.collection<Contact>('contacts');
   }
 
-  getcontactsObservable(): Observable<Contact[]> {
-    return this.contactsRef.snapshotChanges()
+  getContactsObservable(companyId: string): Observable<Contact[]> {
+    return runInInjectionContext(this.environmentInjector, () => {
+    const filteredContacts = companyId != null ?
+    this.db.collection<Contact>('contacts', (ref: CollectionReference) => ref.where('companyKey', '==', companyId))
+    : this.contactsRef;
+    
+    return filteredContacts.snapshotChanges()
       .pipe(
         map((items: DocumentChangeAction<Contact>[]): Contact[] => {
           return items.map((item: DocumentChangeAction<Contact>): Contact => {
@@ -28,6 +33,7 @@ export class ContactService {
           });
         })
       );
+    })
   }
 
   getcontactObservable(id: string | null): Observable<Contact | undefined> {
