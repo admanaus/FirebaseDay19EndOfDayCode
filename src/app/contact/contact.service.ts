@@ -7,7 +7,7 @@ import { runInInjectionContext } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class contactService {
+export class ContactService {
   private contactsRef: AngularFirestoreCollection<Contact>;
   private environmentInjector = inject(EnvironmentInjector);
 

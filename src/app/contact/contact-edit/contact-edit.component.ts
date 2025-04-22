@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { Observable, of } from 'rxjs';
 import { Contact } from '../../models/contact';
-import { contactService } from '../contact.service';
+import { ContactService } from '../contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Company } from '../../models/company';
+import { CompanyService } from '../../company/company.service';
 
 
 @Component({
@@ -15,19 +17,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ContactEditComponent implements OnInit {
 
   contact$: Observable<Contact | undefined>;
+  companies$: Observable<Company[]>; 
+
   contact: Contact | undefined;
 
   constructor(
-    private contactService: contactService,
+    private contactService: ContactService,
+    private companyService: CompanyService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
-    this.contact$ = this.contactService.getcontactObservable(this.id);
-
-    if (!this.isNew) {
-      this.contact$ = contactService.getcontactObservable(this.id);
-    } else {
-      this.contact$ = of({} as Contact);
-    }
+    private router: Router) 
+    {
+      this.contact$ = this.contactService.getcontactObservable(this.id);
+      this.companies$ = companyService.getCompaniesObservable();
+      if (!this.isNew) {
+        this.contact$ = contactService.getcontactObservable(this.id);
+      } else {
+        this.contact$ = of({} as Contact);
+      }
   }
 
   ngOnInit() {
