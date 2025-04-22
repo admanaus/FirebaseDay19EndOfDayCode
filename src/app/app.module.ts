@@ -8,9 +8,7 @@ import { MatCardActions, MatCardModule } from "@angular/material/card"
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import {MatButton, MatFabButton} from "@angular/material/button";
 import { MatInputModule } from '@angular/material/input';
-import {MatIcon} from "@angular/material/icon";
 import { environment } from '../environment';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/firestore";
@@ -19,12 +17,16 @@ import { FormsModule } from '@angular/forms';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanyService } from './company/company.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyEditComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    ContactEditComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,

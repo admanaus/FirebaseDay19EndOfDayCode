@@ -1,0 +1,9 @@
+<h1>contacts</h1>
+<mat-card *ngFor="let contact of contacts$ | async" class="contact-card">
+  <mat-card-content class="contact-content">
+    <span>{{ contact.name }}</span>
+    <span class="spacer"></span>
+    <button mat-raised-button [routerLink]="['/contact', contact.id]">Edit</button>
+  </mat-card-content>
+</mat-card>
+<button mat-fab [routerLink]="['/contact/new']"><mat-icon>add</mat-icon></button>
