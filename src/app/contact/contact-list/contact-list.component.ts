@@ -25,7 +25,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.getCompanies();
-    this.getContacts();
+    this.getContacts('');
   }
 
   getCompanies() {
@@ -35,9 +35,7 @@ export class ContactListComponent implements OnInit {
   getContacts(companyId: string = '') {
     console.log('companyId', companyId);
     this.contacts$ = this.contactService.getContactsObservable(companyId);
-    this.contacts$.subscribe((contacts: Contact[]) => {
-      console.log('contacts', contacts);
-    });
+    
   }
 
 }

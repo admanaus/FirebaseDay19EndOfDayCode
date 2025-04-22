@@ -16,8 +16,9 @@ export class ContactService {
   }
 
   getContactsObservable(companyId: string): Observable<Contact[]> {
+    console.log('companyId in the service', companyId);
     return runInInjectionContext(this.environmentInjector, () => {
-    const filteredContacts = companyId != null ?
+    const filteredContacts = companyId != '' ?
     this.db.collection<Contact>('contacts', (ref: CollectionReference) => ref.where('companyKey', '==', companyId))
     : this.contactsRef;
     
